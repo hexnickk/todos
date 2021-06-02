@@ -2,18 +2,17 @@ module.exports = {
     root: true,
     parser: '@typescript-eslint/parser',
     env: {
-        "node": true
+        node: true,
     },
-    plugins: [
-        '@typescript-eslint',
-    ],
+    plugins: ['@typescript-eslint'],
     extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
-        "react-app",
-        "react-app/jest"
+        'react-app',
+        'react-app/jest',
+        'prettier',
     ],
     rules: {
-        "@typescript-eslint/explicit-module-boundary-types": 0
-    }
+        '@typescript-eslint/explicit-module-boundary-types': 0,
+    },
 };

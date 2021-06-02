@@ -3,13 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "5.11.8",
-    "@testing-library/react": "9.5.0",
-    "@testing-library/user-event": "9.0.0",
-    "@types/jest": "^26.0.19",
-    "@types/node": "^12.19.12",
-    "@types/react": "16.14.2",
-    "@types/react-dom": "16.9.10",
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-scripts": "3.4.4",
@@ -18,9 +11,10 @@
   "scripts": {
     "start": "PORT=8000 react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "yarn eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint:ts": "eslint '**/*.{js,ts,tsx}' && prettier -c '**/*.{js,ts,tsx}'",
+    "lint:html": "prettier -c '**/*.html'",
+    "lint": "yarn lint:ts && yarn lint:html"
   },
   "browserslist": {
     "production": [
@@ -35,9 +29,12 @@
     ]
   },
   "devDependencies": {
+    "@types/node": "^12.19.12",
+    "@types/react": "16.14.2",
+    "@types/react-dom": "16.9.10",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
-    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-flowtype": "^5.7.2",
     "eslint-plugin-import": "^2.23.4",
