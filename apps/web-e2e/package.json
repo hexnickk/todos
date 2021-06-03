@@ -4,5 +4,9 @@
     "dependencies": {
         "@types/node": "^15.12.0",
         "cypress": "^7.4.0"
+    },
+    "scripts": {
+        "start": "yarn cypress run --headless",
+        "open": "yarn cypress open"
     }
 }
