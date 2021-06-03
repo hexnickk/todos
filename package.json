@@ -19,6 +19,8 @@
     "scripts": {
         "lint:ts": "eslint '**/*.{js,ts,tsx}' && prettier -c '**/*.{js,ts,tsx}'",
         "lint:html": "prettier -c '**/*.html'",
-        "lint": "yarn lint:ts && yarn lint:html"
+        "lint": "yarn lint:ts && yarn lint:html",
+        "web": "yarn --cwd apps/web",
+        "web:start": "yarn web start"
     }
 }
