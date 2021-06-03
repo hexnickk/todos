@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from 'react';
 import './todos-list.page.less';
 
-import { Spin } from 'antd';
+import { Alert, Spin } from 'antd';
 import { useStore } from 'effector-react';
 import { TableComponent, TableFiltersComponent } from '/todos/components';
 import { $filteredTodos, fetchTodosFx } from '/todos/stores';
@@ -18,6 +18,7 @@ export const TodosListPage = memo(() => {
                 <h1 className="list__header">Todos</h1>
                 <Spin spinning={todos$.loading}>
                     <TableFiltersComponent className="list__filters" />
+                    {todos$.error ? <Alert message={todos$.error} type="error" /> : <></>}
                     <TableComponent items={todos$.todos} />
                 </Spin>
             </div>

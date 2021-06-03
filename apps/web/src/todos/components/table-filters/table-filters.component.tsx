@@ -27,8 +27,7 @@ export const TableFiltersComponent = memo((props: Props) => {
     let completedChangeHandler = useCallback(
         (value: string) =>
             TodosSetFilter({
-                completed:
-                    value === '-' ? undefined : value === 'yes' ? true : false,
+                completed: value === '-' ? undefined : value === 'yes' ? true : false,
             }),
         []
     );
@@ -40,21 +39,14 @@ export const TableFiltersComponent = memo((props: Props) => {
 
     return (
         <div data-scope="table-filters" className={props.className}>
-            <Form
-                className="filters"
-                layout="inline"
-                onFinish={formSubmitHandler}
-            >
+            <Form className="filters" layout="inline" onFinish={formSubmitHandler}>
                 <Form.Item
                     data-cy="todos-table-filters__search"
                     className="filters__field"
                     name="search"
                     label="Search:"
                 >
-                    <Input
-                        placeholder="Keyword..."
-                        onChange={searchChangeHandler}
-                    />
+                    <Input placeholder="Keyword..." onChange={searchChangeHandler} />
                 </Form.Item>
                 <Form.Item
                     data-cy="todos-table-filters__completed"

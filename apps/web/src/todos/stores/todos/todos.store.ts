@@ -31,15 +31,9 @@ export const $filteredTodos = $todos.map((state) => ({
             (todo) =>
                 state.filters.search === undefined ||
                 // TODO: replace with fuzzy search
-                todo.title
-                    .toLowerCase()
-                    .includes(state.filters.search.toLowerCase())
+                todo.title.toLowerCase().includes(state.filters.search.toLowerCase())
         )
-        .filter(
-            (todo) =>
-                state.filters.completed === undefined ||
-                todo.completed === state.filters.completed
-        ),
+        .filter((todo) => state.filters.completed === undefined || todo.completed === state.filters.completed),
 }));
 
 $todos

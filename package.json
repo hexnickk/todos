@@ -18,8 +18,11 @@
     },
     "scripts": {
         "lint:ts": "eslint '**/*.{js,ts,tsx}' && prettier -c '**/*.{js,ts,tsx}'",
+        "lint:ts:fix": "eslint --fix '**/*.{js,ts,tsx}' && prettier -c -w '**/*.{js,ts,tsx}'",
         "lint:html": "prettier -c '**/*.html'",
+        "lint:html:fix": "prettier -c -w '**/*.html'",
         "lint": "yarn lint:ts && yarn lint:html",
+        "lint:fix": "yarn lint:ts:fix && yarn lint:html:fix",
         "web": "yarn --cwd apps/web",
         "web:start": "yarn web start"
     }

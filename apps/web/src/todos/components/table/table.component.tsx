@@ -18,8 +18,7 @@ let columns = [
         title: 'Completed',
         dataIndex: 'completed',
         key: 'id',
-        render: (completed: Todo['completed']) =>
-            completed ? <span>yes</span> : <span>no</span>,
+        render: (completed: Todo['completed']) => (completed ? <span>yes</span> : <span>no</span>),
     },
 ];
 

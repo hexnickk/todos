@@ -8,12 +8,9 @@ declare namespace Cypress {
     }
 }
 
-Cypress.Commands.add(
-    'getCy',
-    (selector: string, subselector = ''): Cypress.Chainable<JQuery> => {
-        return cy.get(`[data-cy="${selector}"] ${subselector}`);
-    }
-);
+Cypress.Commands.add('getCy', (selector: string, subselector = ''): Cypress.Chainable<JQuery> => {
+    return cy.get(`[data-cy="${selector}"] ${subselector}`);
+});
 
 //
 // -- This is a parent command --

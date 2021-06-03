@@ -3,9 +3,6 @@ module.exports = {
     rules: {
         '@typescript-eslint/no-namespace': 0,
         '@typescript-eslint/no-explicit-any': 0,
-        '@typescript-eslint/no-unused-vars': [
-            'error',
-            { argsIgnorePattern: '^_' },
-        ],
+        '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     },
 };
