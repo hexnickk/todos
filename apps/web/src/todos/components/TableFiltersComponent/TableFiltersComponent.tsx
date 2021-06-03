@@ -1,8 +1,10 @@
-import React, { memo, useCallback } from 'react';
+import React, { ChangeEvent, memo, useCallback, useState } from 'react';
 import './TableFiltersComponent.less';
 
 import { Button, Form, Input, Select } from 'antd';
 import { TodosSetFilter } from '/todos/stores';
+import { useDebounceValue } from '@libs/hooks';
+import { useEffect } from 'react';
 
 let { Option } = Select;
 
@@ -11,13 +13,18 @@ interface Props {
 }
 
 export const TableFiltersComponent = memo((props: Props) => {
-    let [form] = Form.useForm();
+    let [search, setSearch] = useState('');
+    let debouncedSearch = useDebounceValue<string>(search, 200);
 
-    let onSearchSubmit = (values: any) => {
-        TodosSetFilter({ search: values.search });
-    };
+    useEffect(() => {
+        TodosSetFilter({ search: debouncedSearch });
+    }, [debouncedSearch]);
 
-    let onCompletedChange = useCallback(
+    let formSubmitHandler = useCallback(() => {
+        TodosSetFilter({ search });
+    }, [search]);
+
+    let completedChangeHandler = useCallback(
         (value: string) =>
             TodosSetFilter({
                 completed:
@@ -26,34 +33,40 @@ export const TableFiltersComponent = memo((props: Props) => {
         []
     );
 
+    let searchChangeHandler = useCallback(
+        (event: ChangeEvent<HTMLInputElement>) => setSearch(event.target.value),
+        [setSearch]
+    );
+
     return (
-        <div className={props.className}>
+        <div data-scope="table-filters" className={props.className}>
             <Form
-                className="table-filters"
-                form={form}
-                initialValues={{ completed: '-' }}
+                className="filters"
                 layout="inline"
-                onFinish={onSearchSubmit}
+                onFinish={formSubmitHandler}
             >
                 <Form.Item
-                    className="table-filters__field"
+                    className="filters__field"
                     name="search"
                     label="Search:"
                 >
-                    <Input placeholder="Keyword..." />
+                    <Input
+                        placeholder="Keyword..."
+                        onChange={searchChangeHandler}
+                    />
                 </Form.Item>
                 <Form.Item
-                    className="table-filters__field"
+                    className="filters__field"
                     name="completed"
                     label="Completed:"
                 >
-                    <Select onChange={onCompletedChange}>
+                    <Select defaultValue="-" onChange={completedChangeHandler}>
                         <Option value="-">-</Option>
                         <Option value="yes">yes</Option>
                         <Option value="no">no</Option>
                     </Select>
                 </Form.Item>
-                <Form.Item className="table-filters__field_disabled">
+                <Form.Item className="filters__field_disabled">
                     <Button htmlType="submit" type="primary">
                         Submit
                     </Button>

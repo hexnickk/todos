@@ -13,12 +13,14 @@ export const TodosListPage = memo(() => {
     }, []);
 
     return (
-        <div className="todos-list">
-            <h1 className="todos-list__header">Todos</h1>
-            <Spin spinning={todos$.loading}>
-                <TableFiltersComponent className="todos-list__filters" />
-                <TableComponent items={todos$.todos} />
-            </Spin>
+        <div data-scope="todos-list">
+            <div className="list">
+                <h1 className="list__header">Todos</h1>
+                <Spin spinning={todos$.loading}>
+                    <TableFiltersComponent className="list__filters" />
+                    <TableComponent items={todos$.todos} />
+                </Spin>
+            </div>
         </div>
     );
 });

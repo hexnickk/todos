@@ -32,6 +32,7 @@
     },
     "alias": {
         "@libs/sample": "../../libs/sample",
+        "@libs/hooks": "../../libs/hooks",
         "@environment": "./environment/environment.ts"
     },
     "browserslist": {
