@@ -30,6 +30,12 @@ Tablet
 Mobile
 ![](.github/assests/Screen Shot 2021-06-04 at 01.10.00.png)
 
+E2E tests
+![](.github/assests/Screen Shot 2021-06-04 at 00.20.24.png)
+
+Linter checks
+![](.github/assests/Screen Shot 2021-06-04 at 01.15.11.png)
+
 # Features
 
 -   Linters
