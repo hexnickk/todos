@@ -11,7 +11,7 @@ const NotFoundPage = lazy(() =>
 
 export const AppRouter = memo(() => (
     <Router>
-        <Suspense fallback={<SuspenseLoader/>}>
+        <Suspense fallback={<SuspenseLoader />}>
             <Switch>
                 <Route exact path="/" component={TodosListPage} />
                 <Route path="*" component={NotFoundPage} />
