@@ -12,5 +12,6 @@ module.exports = {
     ],
     rules: {
         '@typescript-eslint/explicit-module-boundary-types': 0,
+        'prefer-const': 0,
     },
 };

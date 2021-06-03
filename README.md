@@ -20,3 +20,7 @@ Unit tests -> E2E tests with cypress
     -   Web
     -   Web-e2e
     -   Libs (like this, we can share code between apps)
+
+-   Styles (LESS)
+    -   Ant Design
+    -   Normalize.css

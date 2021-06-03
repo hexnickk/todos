@@ -8,6 +8,7 @@
         "@types/react-dom": "16.9.10",
         "@types/react-router-dom": "^5.1.7",
         "antd": "^4.16.1",
+        "axios": "^0.21.1",
         "effector": "^21.8.11",
         "effector-react": "^21.3.2",
         "eslint-config-react-app": "^6.0.0",
@@ -18,18 +19,20 @@
         "eslint-plugin-react": "^7.24.0",
         "eslint-plugin-react-hooks": "^4.2.0",
         "eslint-plugin-testing-library": "^4.6.0",
+        "less": "^4.1.1",
+        "normalize.css": "^8.0.1",
         "parcel-bundler": "^1.12.5",
         "react": "16.14.0",
         "react-dom": "16.14.0",
-        "react-router-dom": "^5.2.0",
-        "less": "^4.1.1"
+        "react-router-dom": "^5.2.0"
     },
     "scripts": {
         "parcel": "PARCEL_AUTOINSTALL=false parcel",
         "start": "yarn parcel start src/index.html"
     },
     "alias": {
-        "@libs/sample": "../../libs/sample"
+        "@libs/sample": "../../libs/sample",
+        "@environment": "./environment/environment.ts"
     },
     "browserslist": {
         "production": [
