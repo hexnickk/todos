@@ -1,5 +1,5 @@
 import React, { memo, useEffect } from 'react';
-import './TodosListPage.less';
+import './todos-list.page.less';
 
 import { Spin } from 'antd';
 import { useStore } from 'effector-react';

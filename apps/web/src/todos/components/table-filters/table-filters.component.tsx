@@ -1,5 +1,5 @@
 import React, { ChangeEvent, memo, useCallback, useState } from 'react';
-import './TableFiltersComponent.less';
+import './table-filters.component.less';
 
 import { Button, Form, Input, Select } from 'antd';
 import { TodosSetFilter } from '/todos/stores';

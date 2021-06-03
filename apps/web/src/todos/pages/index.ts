@@ -1,1 +1,1 @@
-export * from './TodosListPage/TodosListPage';
+export * from './todos-list/todos-list.page';
