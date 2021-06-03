@@ -19,22 +19,22 @@ yarn
 # Screenshots
 
 Desktop
-![](.github/assests/Screen Shot 2021-06-04 at 01.09.49.png)
+![](.github/assests/Screen%20Shot%202021-06-04%20at%2001.09.49.png)
 
 Desktop search example
-![](.github/assests/Screen Shot 2021-06-04 at 01.10.22.png)
+![](.github/assests/Screen%20Shot%202021-06-04%20at%2001.10.22.png)
 
 Tablet
-![](.github/assests/Screen Shot 2021-06-04 at 01.10.08.png)
+![](.github/assests/Screen%20Shot%202021-06-04%20at%2001.10.08.png)
 
 Mobile
-![](.github/assests/Screen Shot 2021-06-04 at 01.10.00.png)
+![](.github/assests/Screen%20Shot%202021-06-04%20at%2001.10.00.png)
 
 E2E tests
-![](.github/assests/Screen Shot 2021-06-04 at 00.20.24.png)
+![](.github/assests/Screen%20Shot%202021-06-04%20at%2000.20.24.png)
 
 Linter checks
-![](.github/assests/Screen Shot 2021-06-04 at 01.15.11.png)
+![](.github/assests/Screen%20Shot%202021-06-04%20at%2001.15.11.png)
 
 # Features
 
