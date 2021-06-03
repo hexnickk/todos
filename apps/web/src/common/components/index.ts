@@ -1,1 +1,1 @@
-export * from './SuspenseLoader/SuspenseLoader';
+export * from './suspense-loader/suspense-loader.component';

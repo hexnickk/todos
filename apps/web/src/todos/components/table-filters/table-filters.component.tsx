@@ -46,6 +46,7 @@ export const TableFiltersComponent = memo((props: Props) => {
                 onFinish={formSubmitHandler}
             >
                 <Form.Item
+                    data-cy="todos-table-filters__search"
                     className="filters__field"
                     name="search"
                     label="Search:"
@@ -56,6 +57,7 @@ export const TableFiltersComponent = memo((props: Props) => {
                     />
                 </Form.Item>
                 <Form.Item
+                    data-cy="todos-table-filters__completed"
                     className="filters__field"
                     name="completed"
                     label="Completed:"
