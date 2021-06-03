@@ -1,9 +1,10 @@
 import React, { memo, useEffect } from 'react';
+import './TodosListPage.less';
+
 import { Spin } from 'antd';
 import { useStore } from 'effector-react';
-import { TableComponent } from '/todos/components/TableComponent';
-import { $filteredTodos, fetchTodosFx } from '/todos/stores/todos';
-import { TableFiltersComponent } from '/todos/components/TableFiltersComponent';
+import { TableComponent, TableFiltersComponent } from '/todos/components';
+import { $filteredTodos, fetchTodosFx } from '/todos/stores';
 
 export const TodosListPage = memo(() => {
     let todos$ = useStore($filteredTodos);
@@ -12,12 +13,12 @@ export const TodosListPage = memo(() => {
     }, []);
 
     return (
-        <>
-            <h1>Todos</h1>
+        <div className="todos-list">
+            <h1 className="todos-list__header">Todos</h1>
             <Spin spinning={todos$.loading}>
-                <TableFiltersComponent />
+                <TableFiltersComponent className="todos-list__filters" />
                 <TableComponent items={todos$.todos} />
             </Spin>
-        </>
+        </div>
     );
 });

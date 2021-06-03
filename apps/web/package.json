@@ -27,7 +27,7 @@
         "react-router-dom": "^5.2.0"
     },
     "scripts": {
-        "parcel": "PARCEL_AUTOINSTALL=false parcel",
+        "parcel": "PARCEL_AUTOINSTALL=false parcel --hmr-port=1235",
         "start": "yarn parcel start src/index.html"
     },
     "alias": {
