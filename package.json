@@ -25,6 +25,7 @@
         "lint:fix": "yarn lint:ts:fix && yarn lint:html:fix",
         "web": "yarn --cwd apps/web",
         "web:start": "yarn web start",
+        "web:build": "yarn web build",
         "web-e2e": "yarn --cwd apps/web-e2e",
         "web-e2e:start": "yarn web-e2e start",
         "web-e2e:open": "yarn web-e2e open"
