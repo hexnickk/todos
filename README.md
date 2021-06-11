@@ -79,5 +79,7 @@ Linter checks
 # Resources
 
 Api reference -> [jsonplaceholder.typicode.com](https://jsonplaceholder.typicode.com/guide/)
+
 State management -> [effector.dev](https://effector.dev/)
+
 Components library -> [ant.design](https://ant.design/)
