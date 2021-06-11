@@ -49,25 +49,32 @@ Linter checks
     -   ❌ SCSS via stylelint
 
 -   🟨 Test
+
     -   ✅ E2E tests with cypress for the whole app
     -   ❌ Unit tests for stores
+    -   ❌ Sentry checks
 
 -   🟨 Apps
 
     -   🟨 Web
         -   ✅ Initial loader
         -   🟨 Not found page
-            - ✅ Add basic not found page and it's route
-            - ❌ Style todo page
+            -   ✅ Add basic not found page and it's route
+            -   ❌ Style not found page
         -   ✅ Todos table page
         -   ✅ Publish app to Netlify
-        -   ❌ Fix minification for Parcel
+        -   ❌ Fix minification for Parcel (it's broken on Parcel itself)
         -   ❌ Change favicon
-        -   ❌ Load only required ant design CSS files
-        -   ❌ Reduce bundle size
+        -   ❌ Load only required ant design CSS files (so we don't load unused styles)
+        -   ❌ Reduce bundle size (there are some issues with it now, it is huge)
         -   ❓ Add create/update todo functionality (wasn't required)
     -   ✅ Web-e2e
     -   ✅ Libs (code shared between different apps)
+
+-   ❌ CI/CD
+    -   ❌ Basic docker-compose files
+    -   ❌ Basic linter checks during the deploy
+    -   ❌ Basic e2e tests check during the deploy
 
 # Resources
 
