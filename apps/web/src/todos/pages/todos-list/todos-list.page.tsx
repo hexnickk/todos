@@ -1,6 +1,5 @@
 import React, { memo, useEffect } from 'react';
 import './todos-list.page.less';
-
 import { Alert, Spin } from 'antd';
 import { useStore } from 'effector-react';
 import { TableComponent, TableFiltersComponent } from '/todos/components';

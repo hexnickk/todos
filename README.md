@@ -1,22 +1,24 @@
-(✨ Demo)[https://affectionate-carson-38718b.netlify.app/]
-
-# Major updates
-
-❗️ Note for major changes copared to initial setup:
-
--   Creact React App -> Parcel.
--   Unit tests -> E2E tests with cypress.
+[✨ Demo](https://affectionate-carson-38718b.netlify.app/)
 
 # How to run
 
-1. Install deps.
+First, you need to install dependencies.
 
 ```bash
 yarn
 ```
 
-2. If you want to run web app -> [apps/web/README.md](./apps/web/README.md)
-3. If you want to run web-e2e app -> [apps/web-e2e/README.md](./apps/web-e2e/README.md)
+If you want to run web app.
+
+```bash
+yarn web:start
+```
+
+If you want to run web-e2e app, first, start the web app, and then.
+
+```bash
+yarn web-e2e:open
+```
 
 # Screenshots
 
@@ -40,35 +42,35 @@ Linter checks
 
 # Features
 
--   Linters
+-   🟨 Linters
 
-    -   ✅ HTML -> Prettier.
-    -   ✅ TS -> eslint (tslint) + Prettier.
-    -   ❌ SCSS -> stylelint.
+    -   ✅ HTML via Prettier
+    -   ✅ TS via eslint (tslint) + Prettier
+    -   ❌ SCSS via stylelint
 
--   Tests.
+-   🟨 Test
+    -   ✅ E2E tests with cypress for the whole app
+    -   ❌ Unit tests for stores
 
-    -   ✅ E2E tests with cypress for the whole app.
-    -   ❌ Unit tests for stores.
+-   🟨 Apps
 
--   Apps
-
-    -   Web.
-        -   ✅ Initial loader.
-        -   ✅ Not found page (not styled).
-        -   ✅ Todos table page.
-        -   ✅ Publish app to Netlify.
+    -   🟨 Web
+        -   ✅ Initial loader
+        -   🟨 Not found page
+            - ✅ Add basic not found page and it's route
+            - ❌ Style todo page
+        -   ✅ Todos table page
+        -   ✅ Publish app to Netlify
         -   ❌ Fix minification for Parcel
-        -   ❌ Change favicon.
-        -   ❌ Load only required ant design CSS files.
-        -   ❌ Reduce bundle size.
-        -   ❓ Add create/update todo functionality (wasn't required).
-    -   Web-e2e.
-    -   Libs (code shared between different apps).
+        -   ❌ Change favicon
+        -   ❌ Load only required ant design CSS files
+        -   ❌ Reduce bundle size
+        -   ❓ Add create/update todo functionality (wasn't required)
+    -   ✅ Web-e2e
+    -   ✅ Libs (code shared between different apps)
 
 # Resources
 
-Design drafts -> [figma.com](https://www.figma.com/file/zzkUBJ4ZlzEKrKWZ4KS2Xh/Docler)
 Api reference -> [jsonplaceholder.typicode.com](https://jsonplaceholder.typicode.com/guide/)
 State management -> [effector.dev](https://effector.dev/)
 Components library -> [ant.design](https://ant.design/)

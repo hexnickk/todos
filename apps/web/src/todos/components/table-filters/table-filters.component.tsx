@@ -1,10 +1,8 @@
-import React, { ChangeEvent, memo, useCallback, useState } from 'react';
+import React, { ChangeEvent, memo, useCallback, useState, useEffect } from 'react';
 import './table-filters.component.less';
-
 import { Button, Form, Input, Select } from 'antd';
 import { TodosSetFilter } from '/todos/stores';
 import { useDebounceValue } from '@libs/hooks';
-import { useEffect } from 'react';
 
 let { Option } = Select;
 
