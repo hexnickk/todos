@@ -1,8 +1,8 @@
-import React, { ChangeEvent, memo, useCallback, useState, useEffect } from 'react';
+import React, { ChangeEvent, memo, useCallback, useEffect, useState } from 'react';
 import './table-filters.component.less';
 import { Button, Form, Input, Select } from 'antd';
 import { TodosSetFilter } from '/todos/stores';
-import { useDebounceValue } from '@libs/hooks';
+import { useDebounceValue } from 'react-hooks';
 
 let { Option } = Select;
 
@@ -25,7 +25,7 @@ export const TableFiltersComponent = memo((props: Props) => {
     let completedChangeHandler = useCallback(
         (value: string) =>
             TodosSetFilter({
-                completed: value === '-' ? undefined : value === 'yes' ? true : false,
+                completed: value === '-' ? undefined : value === 'yes',
             }),
         []
     );

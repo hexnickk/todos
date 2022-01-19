@@ -1,5 +1,5 @@
 {
-    "extends": "../../tsconfig.base.json",
+    "extends": "../../libs/config-typescript/tsconfig.base.json",
     "compilerOptions": {
         "target": "es6",
         "lib": ["dom", "dom.iterable", "esnext"],
@@ -19,7 +19,6 @@
         "paths": {
             "/*": ["./src/*"],
             "@environment": ["./environment/environment.ts"],
-            "@libs/*": ["../../libs/*"]
         }
     },
     "include": ["src", "index.tsx"]

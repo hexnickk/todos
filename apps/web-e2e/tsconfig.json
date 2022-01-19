@@ -1,5 +1,5 @@
 {
-    "extends": "../../tsconfig.base.json",
+    "extends": "../../libs/config-typescript/tsconfig.base.json",
     "compilerOptions": {
         "target": "es5",
         "lib": ["es5", "dom"],

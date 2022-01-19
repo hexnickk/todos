@@ -1,5 +1,5 @@
 import { createEvent, createStore } from 'effector';
-import { fetchTodosFx } from './todos.effects';
+import { fetchTodosFx } from '/todos/stores';
 import { Todos } from '/todos/models';
 
 interface Store {
@@ -55,7 +55,3 @@ $todos
         ...state,
         filters: { ...state.filters, ...filters },
     }));
-
-$todos.watch((state) => {
-    console.log('todos:', state);
-});
