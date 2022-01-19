@@ -1,4 +1,8 @@
 module.exports = {
-    extends: ['../../.eslintrc.js', 'react-app', 'react-app/jest'],
+    extends: [
+        '../../libs/config-eslint-typescript/.eslintrc.js',
+        'react-app',
+        'react-app/jest'
+    ],
     rules: {},
 };
