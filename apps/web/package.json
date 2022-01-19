@@ -3,12 +3,10 @@
     "version": "1.0.0",
     "private": true,
     "dependencies": {
-        "antd": "^4.16.1",
         "axios": "^0.21.1",
         "babel-eslint": "^10.1.0",
         "effector": "^21.8.11",
         "effector-react": "^21.3.2",
-        "less": "^4.1.1",
         "normalize.css": "^8.0.1",
         "parcel-bundler": "^1.12.5",
         "react": "16.14.0",
