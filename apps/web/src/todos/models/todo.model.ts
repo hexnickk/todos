@@ -1,8 +1,9 @@
 export interface Todo {
-    id: number;
-    userId: number;
+    publicId: string;
     title: string;
     completed: boolean;
 }
+
+export type NewTodo = Omit<Todo, 'publicId'>;
 
 export type Todos = Todo[];

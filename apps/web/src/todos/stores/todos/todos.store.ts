@@ -1,8 +1,9 @@
 import { createEvent, createStore } from 'effector';
-import { fetchTodosFx } from '/todos/stores';
-import { Todos } from '/todos/models';
+import { fetchTodosFx } from './todos.effects';
+import { NewTodo, Todo, Todos } from '../../models';
+import { nanoid } from 'nanoid';
 
-interface Store {
+export interface TodosStore {
     filters: {
         search?: string;
         completed?: boolean;
@@ -12,9 +13,10 @@ interface Store {
     error?: string;
 }
 
-export let TodosSetFilter = createEvent<Store['filters']>();
+export let todosSetFilter = createEvent<TodosStore['filters']>();
+export let todosNewItem = createEvent<NewTodo>();
 
-export let $todos = createStore<Store>({
+export let $todos = createStore<TodosStore>({
     filters: {
         search: undefined,
         completed: undefined,
@@ -51,7 +53,16 @@ $todos
         todos,
         error: undefined,
     }))
-    .on(TodosSetFilter, (state, filters) => ({
-        ...state,
-        filters: { ...state.filters, ...filters },
-    }));
+    .on(todosNewItem, (state, newTodo) => {
+        let todo: Todo = {
+            ...newTodo,
+            publicId: nanoid(),
+        };
+        return { ...state, todos: [...state.todos, todo] };
+    })
+    .on(todosSetFilter, (state, filters) => {
+        return {
+            ...state,
+            filters: { ...state.filters, ...filters },
+        };
+    });
