@@ -3,11 +3,11 @@ import {useState as $hCgyA$useState, useEffect as $hCgyA$useEffect} from "react"
 function $parcel$export(e, n, v, s) {
   Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
 }
-var $efe664e7e4bfd8af$exports = {};
+var $51e007112a91c565$exports = {};
 
-$parcel$export($efe664e7e4bfd8af$exports, "useDebounceValue", () => $efe664e7e4bfd8af$export$52bae15610182273);
+$parcel$export($51e007112a91c565$exports, "useDebounceValue", () => $51e007112a91c565$export$52bae15610182273);
 
-let $efe664e7e4bfd8af$export$52bae15610182273 = (value, delay)=>{
+let $51e007112a91c565$export$52bae15610182273 = (value, delay)=>{
     const [debouncedValue, setDebouncedValue] = $hCgyA$useState(value);
     $hCgyA$useEffect(()=>{
         const handler = setTimeout(()=>{
@@ -24,7 +24,26 @@ let $efe664e7e4bfd8af$export$52bae15610182273 = (value, delay)=>{
 };
 
 
+var $16113f1836cb432c$exports = {};
+
+$parcel$export($16113f1836cb432c$exports, "useClickOutside", () => $16113f1836cb432c$export$1896bab46732d207);
+
+function $16113f1836cb432c$export$1896bab46732d207(ref, callback) {
+    $hCgyA$useEffect(()=>{
+        function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target)) callback?.();
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return ()=>{
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [
+        ref
+    ]);
+}
 
 
-export {$efe664e7e4bfd8af$export$52bae15610182273 as useDebounceValue};
+
+
+export {$51e007112a91c565$export$52bae15610182273 as useDebounceValue, $16113f1836cb432c$export$1896bab46732d207 as useClickOutside};
 //# sourceMappingURL=module.js.map

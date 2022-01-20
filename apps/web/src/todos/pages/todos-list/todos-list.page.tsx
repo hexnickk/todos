@@ -18,7 +18,11 @@ export const TodosListPage = memo(() => {
     }, [setShowNew]);
 
     let handleSubmit = useCallback((newTodo) => {
-        todosNewItem(newTodo);
+        if (newTodo != null) {
+            todosNewItem(newTodo);
+        } else {
+            setShowNew(false);
+        }
     }, []);
 
     return (
