@@ -1,5 +1,5 @@
 import { createEvent, createStore } from 'effector';
-import { fetchTodosFx } from './todos.effects';
+// import { fetchTodosFx } from './todos.effects';
 import { NewTodo, Todo, Todos } from '../../models';
 import { nanoid } from 'nanoid';
 
@@ -21,7 +21,28 @@ export let $todos = createStore<TodosStore>({
         search: undefined,
         completed: undefined,
     },
-    todos: [],
+    todos: [
+        {
+            publicId: nanoid(),
+            completed: false,
+            title: '✅ Click on the big green button or click anywhere down below 👇',
+        },
+        {
+            publicId: nanoid(),
+            completed: false,
+            title: '✅ Try typing "Buy some milk".',
+        },
+        {
+            publicId: nanoid(),
+            completed: false,
+            title: '✅ Press "Enter" or click on some empty space again.',
+        },
+        {
+            publicId: nanoid(),
+            completed: false,
+            title: '🎉 Now you know how to use the app, good job!',
+        },
+    ],
     loading: false,
     error: undefined,
 });
@@ -39,20 +60,20 @@ export const $filteredTodos = $todos.map((state) => ({
 }));
 
 $todos
-    .on(fetchTodosFx.pending, (state, pending) => ({
-        ...state,
-        loading: pending,
-    }))
-    .on(fetchTodosFx.failData, (state, error) => ({
-        ...state,
-        // TODO: get error from response
-        error: 'Some error!',
-    }))
-    .on(fetchTodosFx.doneData, (state, todos) => ({
-        ...state,
-        todos,
-        error: undefined,
-    }))
+    // .on(fetchTodosFx.pending, (state, pending) => ({
+    //     ...state,
+    //     loading: pending,
+    // }))
+    // .on(fetchTodosFx.failData, (state, error) => ({
+    //     ...state,
+    //     // TODO: get error from response
+    //     error: 'Some error!',
+    // }))
+    // .on(fetchTodosFx.doneData, (state, todos) => ({
+    //     ...state,
+    //     todos,
+    //     error: undefined,
+    // }))
     .on(todosNewItem, (state, newTodo) => {
         let todo: Todo = {
             ...newTodo,
