@@ -31,11 +31,14 @@ $parcel$export($16113f1836cb432c$exports, "useClickOutside", () => $16113f1836cb
 function $16113f1836cb432c$export$1896bab46732d207(ref, callback) {
     $hCgyA$useEffect(()=>{
         function handleClickOutside(event) {
-            if (ref.current && !ref.current.contains(event.target)) callback?.();
+            if (ref.current && !ref.current.contains(event.target)) {
+                event.stopPropagation();
+                callback?.(event);
+            }
         }
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("click", handleClickOutside);
         return ()=>{
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("click", handleClickOutside);
         };
     }, [
         ref

@@ -5,13 +5,14 @@ export function useClickOutside(ref, callback) {
     useEffect(() => {
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target)) {
-                callback?.();
+                event.stopPropagation();
+                callback?.(event);
             }
         }
 
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("click", handleClickOutside);
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("click", handleClickOutside);
         };
     }, [ref]);
 }
