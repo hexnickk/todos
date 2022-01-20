@@ -1,13 +1,16 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, MouseEvent, useCallback } from 'react';
 
 interface Props {
-    onClick?: (...args: any[]) => unknown;
+    onClick?: (event: MouseEvent<HTMLButtonElement>) => unknown;
 }
 
 export const PlusButtonComponent = memo(({ onClick }: Props) => {
-    const handleClick = useCallback(() => {
-        onClick?.();
-    }, [onClick]);
+    const handleClick = useCallback(
+        (event: MouseEvent<HTMLButtonElement>) => {
+            onClick?.(event);
+        },
+        [onClick]
+    );
 
     return (
         <>
