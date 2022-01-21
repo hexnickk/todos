@@ -47,17 +47,15 @@ $parcel$export($4dbd76402c1a2bd2$exports, "useClickOutside", () => $4dbd76402c1a
 function $4dbd76402c1a2bd2$export$1896bab46732d207(ref, callback) {
     $g5Y9E$react.useEffect(()=>{
         function handleClickOutside(event) {
-            if (ref.current && !ref.current.contains(event.target)) {
-                event.stopPropagation();
-                callback?.(event);
-            }
+            if (ref.current && !ref.current.contains(event.target)) callback?.(event);
         }
         document.addEventListener("click", handleClickOutside);
         return ()=>{
             document.removeEventListener("click", handleClickOutside);
         };
     }, [
-        ref
+        ref,
+        callback
     ]);
 }
 

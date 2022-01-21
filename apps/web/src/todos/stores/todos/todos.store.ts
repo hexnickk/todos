@@ -15,6 +15,7 @@ export interface TodosStore {
 
 export let todosSetFilter = createEvent<TodosStore['filters']>();
 export let todosNewItem = createEvent<NewTodo>();
+export let todosUpdate = createEvent<Todo>();
 
 export let $todos = createStore<TodosStore>({
     filters: {
@@ -74,16 +75,22 @@ $todos
     //     todos,
     //     error: undefined,
     // }))
-    .on(todosNewItem, (state, newTodo) => {
-        let todo: Todo = {
-            ...newTodo,
-            publicId: nanoid(),
-        };
-        return { ...state, todos: [...state.todos, todo] };
-    })
-    .on(todosSetFilter, (state, filters) => {
-        return {
-            ...state,
-            filters: { ...state.filters, ...filters },
-        };
-    });
+    .on(todosUpdate, (state, updatedTodo) => ({
+        ...state,
+        todos: state.todos.map((todo) => (todo.publicId === updatedTodo.publicId ? updatedTodo : todo)),
+    }));
+// .on(todosNewItem, (state, newTodo) => {
+//     let todo: Todo = {
+//         ...newTodo,
+//         publicId: nanoid(),
+//     };
+//     return { ...state, todos: [...state.todos, todo] };
+// })
+// .on(todosSetFilter, (state, filters) => {
+//     return {
+//         ...state,
+//         filters: { ...state.filters, ...filters },
+//     };
+// });
+
+$todos.watch((state) => console.log(state.todos));

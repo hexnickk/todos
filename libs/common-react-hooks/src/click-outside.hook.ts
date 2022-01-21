@@ -1,11 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, MutableRefObject } from "react";
 
 // reference -> https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
-export function useClickOutside(ref, callback) {
+export function useClickOutside(
+    ref: MutableRefObject<any>,
+    callback: (event: Event) => unknown
+) {
     useEffect(() => {
-        function handleClickOutside(event) {
+        function handleClickOutside(event: Event) {
             if (ref.current && !ref.current.contains(event.target)) {
-                event.stopPropagation();
                 callback?.(event);
             }
         }
@@ -14,5 +16,5 @@ export function useClickOutside(ref, callback) {
         return () => {
             document.removeEventListener("click", handleClickOutside);
         };
-    }, [ref]);
+    }, [ref, callback]);
 }
