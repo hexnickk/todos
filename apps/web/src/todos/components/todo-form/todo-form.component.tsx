@@ -1,14 +1,12 @@
-import React, { KeyboardEvent, memo, useCallback, useRef, useState } from 'react';
+import React, { KeyboardEvent, memo, useCallback, useRef } from 'react';
 import { Todo } from '../../models';
-import { useClickOutside } from 'common-react-hooks';
-import { todosUpdate } from '../../stores';
+import { todosCreate, todosDelete, todosHideForm, todosUpdate } from '../../stores';
 
 interface Props {
     todo?: Todo;
 }
 
 export const TodoFormComponent = memo(({ todo }: Props) => {
-    let [active, setActive] = useState(false);
     let titleRef = useRef<HTMLInputElement | null>(null);
     let formRef = useRef<HTMLFormElement | null>(null);
 
@@ -17,14 +15,24 @@ export const TodoFormComponent = memo(({ todo }: Props) => {
         let title = form?.text.value;
         let completed = form?.checked.checked;
 
-        if (todo) {
+        if (todo != null && title === '') {
+            todosDelete(todo);
+        } else if (todo != null && title !== '') {
             todosUpdate({
                 ...todo,
                 title,
                 completed,
             });
+        } else if (todo == null && title === '') {
+            todosHideForm();
+        } else if (todo == null && title !== '') {
+            todosCreate({
+                title,
+                completed,
+            });
         }
-        titleRef.current?.blur();
+
+        form?.reset();
     }, [todo]);
 
     let handleKeyDown = useCallback(
@@ -37,21 +45,12 @@ export const TodoFormComponent = memo(({ todo }: Props) => {
         [handleSubmit]
     );
 
-    let handleClickInside = useCallback(() => {
-        setActive(true);
-    }, []);
-
-    let handleClickOutside = useCallback(() => {
-        if (active) {
-            setActive(false);
-            handleSubmit();
-        }
-    }, [active, handleSubmit]);
-
-    useClickOutside(titleRef, handleClickOutside);
+    let handleBlur = useCallback(() => {
+        handleSubmit();
+    }, [handleSubmit]);
 
     return (
-        <form ref={formRef} className={`d-flex p-2 align-items-center border-bottom`} onClick={handleClickInside}>
+        <form ref={formRef} className={`d-flex p-2 align-items-center border-bottom`}>
             <input type="checkbox" name="checked" className={`me-2`} style={{ transform: 'scale(1.33)' }} />
             <input
                 ref={titleRef}
@@ -63,6 +62,7 @@ export const TodoFormComponent = memo(({ todo }: Props) => {
                     background: 'inherit',
                 }}
                 defaultValue={todo?.title}
+                onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
             />
         </form>

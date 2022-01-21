@@ -1,25 +1,24 @@
 import { createEvent, createStore } from 'effector';
-// import { fetchTodosFx } from './todos.effects';
 import { NewTodo, Todo, Todos } from '../../models';
 import { nanoid } from 'nanoid';
 
 export interface TodosStore {
     filters: {
-        search?: string;
         completed?: boolean;
     };
     todos: Todos;
-    loading: boolean;
-    error?: string;
+    showCreateForm: boolean;
 }
 
 export let todosSetFilter = createEvent<TodosStore['filters']>();
-export let todosNewItem = createEvent<NewTodo>();
+export let todosCreate = createEvent<NewTodo>();
 export let todosUpdate = createEvent<Todo>();
+export let todosDelete = createEvent<Todo>();
+export let todosShowForm = createEvent();
+export let todosHideForm = createEvent();
 
 export let $todos = createStore<TodosStore>({
     filters: {
-        search: undefined,
         completed: undefined,
     },
     todos: [
@@ -44,53 +43,40 @@ export let $todos = createStore<TodosStore>({
             title: '🎉 Now you know how to use the app, good job!',
         },
     ],
-    loading: false,
-    error: undefined,
+    showCreateForm: false,
 });
 
 export const $filteredTodos = $todos.map((state) => ({
     ...state,
-    todos: state.todos
-        .filter(
-            (todo) =>
-                state.filters.search === undefined ||
-                // TODO: replace with fuzzy search
-                todo.title.toLowerCase().includes(state.filters.search.toLowerCase())
-        )
-        .filter((todo) => state.filters.completed === undefined || todo.completed === state.filters.completed),
+    todos: state.todos.filter(
+        (todo) => state.filters.completed === undefined || todo.completed === state.filters.completed
+    ),
 }));
 
 $todos
-    // .on(fetchTodosFx.pending, (state, pending) => ({
-    //     ...state,
-    //     loading: pending,
-    // }))
-    // .on(fetchTodosFx.failData, (state, error) => ({
-    //     ...state,
-    //     // TODO: get error from response
-    //     error: 'Some error!',
-    // }))
-    // .on(fetchTodosFx.doneData, (state, todos) => ({
-    //     ...state,
-    //     todos,
-    //     error: undefined,
-    // }))
+    .on(todosCreate, (state, createdTodo) => {
+        let todo: Todo = {
+            ...createdTodo,
+            publicId: nanoid(),
+        };
+        return {
+            ...state,
+            todos: [...state.todos, todo],
+        };
+    })
     .on(todosUpdate, (state, updatedTodo) => ({
         ...state,
         todos: state.todos.map((todo) => (todo.publicId === updatedTodo.publicId ? updatedTodo : todo)),
-    }));
-// .on(todosNewItem, (state, newTodo) => {
-//     let todo: Todo = {
-//         ...newTodo,
-//         publicId: nanoid(),
-//     };
-//     return { ...state, todos: [...state.todos, todo] };
-// })
-// .on(todosSetFilter, (state, filters) => {
-//     return {
-//         ...state,
-//         filters: { ...state.filters, ...filters },
-//     };
-// });
+    }))
+    .on(todosDelete, (state, deletedTodo) => ({
+        ...state,
+        todos: state.todos.reduce(
+            (acc: Todos, cur) => (cur.publicId === deletedTodo.publicId ? acc : [...acc, cur]),
+            []
+        ),
+    }))
+    .on(todosShowForm, (state) => ({ ...state, showCreateForm: true }))
+    .on(todosHideForm, (state) => ({ ...state, showCreateForm: false }));
 
+// TODO: Remove later
 $todos.watch((state) => console.log(state.todos));
