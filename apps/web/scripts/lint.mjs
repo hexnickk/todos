@@ -8,9 +8,14 @@ const eslint = async (globe = '*', fix = false) => {
     await $`yarn eslint ${'src/**/' + globe} ${fix ? '--fix' : ''}`
 }
 
+const tsc = async () => {
+    await $`yarn tsc --pretty --noEmit`
+}
+
 const lintTs = async (fix = false) => {
     await prettier('*.{js,ts,tsx}', fix)
     await eslint('*.{js,ts,tsx}', fix)
+    await tsc()
 }
 
 const lintHtml = async (fix = false) => {
