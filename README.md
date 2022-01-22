@@ -5,6 +5,7 @@
 - [ ] Add gif with app functionality for this README
 - [ ] Save state to local storage
 - [ ] Add stylelint checks
+- [ ] Add typescript checks
 - [ ] Fix Eslint plugin, it's buggy
 - Pages
   - [ ] Add not found page

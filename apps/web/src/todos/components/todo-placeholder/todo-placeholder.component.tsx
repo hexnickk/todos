@@ -9,5 +9,5 @@ export const TodoPlaceholderComponent = memo(({ onClick }: Props) => {
         onClick?.();
     }, [onClick]);
 
-    return <div className={'flex-grow-1'} onClick={handleClick} />;
+    return <div className={'flex-grow-1'} data-cy="todo-placeholder" onClick={handleClick} />;
 });
