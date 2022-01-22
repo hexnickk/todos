@@ -32,7 +32,6 @@
         "eslint-plugin-react": "^7.24.0",
         "eslint-plugin-react-hooks": "^4.2.0",
         "eslint-plugin-testing-library": "^5.0.4",
-        "less": "^4.1.2",
         "parcel": "^2.2.1",
         "prettier": "^2.3.0",
         "zx": "^4.3.0"
