@@ -37,11 +37,11 @@ export let update = (todos: Todo[], updatedTodo: Todo) =>
 // --- EVENTS ---
 export let todosCreate = createEvent<NewTodo>();
 export let todosUpdate = createEvent<Todo>();
-export let todosNew = createEvent<Todo | NewTodo>();
+export let todosCreateNew = createEvent<Todo | NewTodo | undefined>();
 export let todosDelete = createEvent<Todo>();
 export let todosDeleteNew = createEvent();
 
-let $todosStore = createStore<TodosStore>({
+export let $todosStore = createStore<TodosStore>({
     filters: {
         completed: undefined,
     },
@@ -78,16 +78,31 @@ export let $todosList = $todosStore
     .map((state) => (state.newTodo != null ? [...state.todos, state.newTodo] : state.todos))
     .map((state) => state.slice().sort((a, b) => a.order - b.order));
 
+export let $todosNew = $todosStore.map((state) => state.newTodo);
+
 $todosStore
-    .on(todosNew, (state, todo) => ({
-        ...state,
-        todos: incOrder(state.todos, todo.order),
-        newTodo: {
-            order: todo.order + 1,
-            completed: false,
-            title: '',
-        },
-    }))
+    .on(todosCreateNew, (state, todo) => {
+        if (todo == null) {
+            let lastOrder = state.todos.reduce((acc, cur) => (cur.order > acc ? cur.order : acc), -1);
+            return {
+                ...state,
+                newTodo: {
+                    order: lastOrder,
+                    completed: false,
+                    title: '',
+                },
+            };
+        }
+        return {
+            ...state,
+            todos: incOrder(state.todos, todo.order),
+            newTodo: {
+                order: todo.order + 1,
+                completed: false,
+                title: '',
+            },
+        };
+    })
     .on(todosUpdate, (state, updatedTodo) => ({
         ...state,
         todos: update(state.todos, updatedTodo),
@@ -112,6 +127,3 @@ $todosStore
         todos: state.newTodo ? decOrder(state.todos, state.newTodo?.order) : state.todos,
         newTodo: undefined,
     }));
-
-// TODO: Remove later
-$todosStore.watch((state) => console.log(JSON.stringify(state, null, 2)));

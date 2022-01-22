@@ -5,10 +5,12 @@
 - [ ] Add gif with app functionality for this README
 - [ ] Save state to local storage
 - [ ] Add stylelint checks
+- [ ] Fix Eslint plugin, it's buggy
 - Pages
   - [ ] Add not found page
   - [ ] Todo list
     - [ ] Allow to edit Todos
+    - [ ] Test on mobile
 - Tests
   - [ ] Add tests for storage
 - CI

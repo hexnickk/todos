@@ -1,6 +1,7 @@
-import React, { KeyboardEvent, memo, MutableRefObject, useCallback, useEffect, useRef, useState } from 'react';
+import React, { KeyboardEvent, memo, useCallback, useRef, useState } from 'react';
 import { NewTodo, Todo, todoIsNew, todoIsRegular } from '../../models';
-import { todosCreate, todosDelete, todosDeleteNew, todosNew, todosUpdate } from '../../stores';
+import { todosCreate, todosDelete, todosDeleteNew, todosCreateNew, todosUpdate } from '../../stores';
+import { useClickOutside } from 'common-react-hooks';
 
 interface Props {
     todo: Todo | NewTodo;
@@ -13,23 +14,6 @@ let handleDelete = (todo: Todo | NewTodo) => {
         todosDeleteNew();
     }
 };
-
-// TODO: Move to libs
-// reference -> https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
-export function useClickOutside(ref: MutableRefObject<any>, callback: (event: Event) => unknown) {
-    useEffect(() => {
-        function handleClickOutside(event: Event) {
-            if (ref.current && !ref.current.contains(event.target)) {
-                callback?.(event);
-            }
-        }
-
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [ref, callback]);
-}
 
 export const TodoFormComponent = memo(({ todo }: Props) => {
     let [active, setActive] = useState(false);
@@ -66,7 +50,7 @@ export const TodoFormComponent = memo(({ todo }: Props) => {
                             titleRef.current?.blur();
                         }
                         if (isEnterKey) {
-                            todosNew(updatedTodo);
+                            todosCreateNew(updatedTodo);
                         }
                     } else {
                         let newTodo = {
@@ -76,7 +60,7 @@ export const TodoFormComponent = memo(({ todo }: Props) => {
                         };
                         todosCreate(newTodo);
                         if (isEnterKey) {
-                            todosNew(newTodo);
+                            todosCreateNew(newTodo);
                         }
                     }
                 }

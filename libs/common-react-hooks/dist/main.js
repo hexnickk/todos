@@ -49,9 +49,9 @@ function $4dbd76402c1a2bd2$export$1896bab46732d207(ref, callback) {
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target)) callback?.(event);
         }
-        document.addEventListener("click", handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside);
         return ()=>{
-            document.removeEventListener("click", handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [
         ref,
