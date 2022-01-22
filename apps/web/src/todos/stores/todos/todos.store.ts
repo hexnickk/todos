@@ -1,57 +1,125 @@
 import { createEvent, createStore } from 'effector';
-import { fetchTodosFx } from '/todos/stores';
-import { Todos } from '/todos/models';
+import { NewTodo, Todo, todoFromNew } from '../../models';
+import { nanoid } from 'nanoid';
 
-interface Store {
-    filters: {
-        search?: string;
-        completed?: boolean;
-    };
-    todos: Todos;
-    loading: boolean;
-    error?: string;
+export interface TodosStore {
+    todos: Todo[];
+    newTodo: NewTodo | null;
 }
 
-export let TodosSetFilter = createEvent<Store['filters']>();
+// --- UTILS ---
+export let incOrder = (todos: Todo[], order: number) =>
+    todos.map((item) =>
+        item.order > order
+            ? {
+                  ...item,
+                  order: item.order + 1,
+              }
+            : item
+    );
 
-export let $todos = createStore<Store>({
-    filters: {
-        search: undefined,
-        completed: undefined,
-    },
-    todos: [],
-    loading: false,
-    error: undefined,
+export let decOrder = (todos: Todo[], order: number) =>
+    todos.map((item) =>
+        item.order >= order
+            ? {
+                  ...item,
+                  order: item.order - 1,
+              }
+            : item
+    );
+
+export let update = (todos: Todo[], updatedTodo: Todo) =>
+    todos.map((item) => (item.publicId === updatedTodo.publicId ? updatedTodo : item));
+
+// --- EVENTS ---
+export let todosCreate = createEvent<NewTodo>();
+export let todosUpdate = createEvent<Todo>();
+export let todosCreateNew = createEvent<Todo | NewTodo | undefined>();
+export let todosDelete = createEvent<Todo>();
+export let todosDeleteNew = createEvent();
+
+export let $todosStore = createStore<TodosStore>({
+    todos: [
+        {
+            order: 0,
+            publicId: nanoid(),
+            completed: false,
+            title: '✅ Click on the big green button or click anywhere down below 👇',
+        },
+        {
+            order: 1,
+            publicId: nanoid(),
+            completed: false,
+            title: '✅ Try typing "Buy some milk".',
+        },
+        {
+            order: 2,
+            publicId: nanoid(),
+            completed: false,
+            title: '✅ Press "Enter" or click on some empty space again.',
+        },
+        {
+            order: 3,
+            publicId: nanoid(),
+            completed: false,
+            title: '🎉 Now you know how to use the app, good job!',
+        },
+    ],
+    newTodo: null,
 });
 
-export const $filteredTodos = $todos.map((state) => ({
-    ...state,
-    todos: state.todos
-        .filter(
-            (todo) =>
-                state.filters.search === undefined ||
-                // TODO: replace with fuzzy search
-                todo.title.toLowerCase().includes(state.filters.search.toLowerCase())
-        )
-        .filter((todo) => state.filters.completed === undefined || todo.completed === state.filters.completed),
-}));
+export let $todosList = $todosStore
+    .map((state) => (state.newTodo != null ? [...state.todos, state.newTodo] : state.todos))
+    .map((state) => state.slice().sort((a, b) => a.order - b.order));
 
-$todos
-    .on(fetchTodosFx.pending, (state, pending) => ({
+export let $todosNew = $todosStore.map((state) => state.newTodo);
+
+$todosStore
+    .on(todosCreateNew, (state, todo) => {
+        if (todo == null) {
+            let lastOrder = state.todos.reduce((acc, cur) => (cur.order > acc ? cur.order : acc), -1);
+            return {
+                ...state,
+                newTodo: {
+                    order: lastOrder,
+                    completed: false,
+                    title: '',
+                },
+            };
+        }
+        return {
+            ...state,
+            todos: incOrder(state.todos, todo.order),
+            newTodo: {
+                order: todo.order + 1,
+                completed: false,
+                title: '',
+            },
+        };
+    })
+    .on(todosUpdate, (state, updatedTodo) => ({
         ...state,
-        loading: pending,
+        todos: update(state.todos, updatedTodo),
     }))
-    .on(fetchTodosFx.failData, (state, error) => ({
+    .on(todosCreate, (state, newTodo) => {
+        let todo = todoFromNew(newTodo);
+        return {
+            ...state,
+            todos: [...state.todos, todo],
+            newTodo: null,
+        };
+    })
+    .on(todosDelete, (state, deletedTodo) => ({
         ...state,
-        // TODO: get error from response
-        error: 'Some error!',
+        todos: decOrder(
+            state.todos.reduce((acc: Todo[], cur) => (cur.publicId === deletedTodo.publicId ? acc : [...acc, cur]), []),
+            deletedTodo.order
+        ),
     }))
-    .on(fetchTodosFx.doneData, (state, todos) => ({
+    .on(todosDeleteNew, (state) => ({
         ...state,
-        todos,
-        error: undefined,
-    }))
-    .on(TodosSetFilter, (state, filters) => ({
-        ...state,
-        filters: { ...state.filters, ...filters },
+        todos: state.newTodo ? decOrder(state.todos, state.newTodo?.order) : state.todos,
+        newTodo: null,
     }));
+
+$todosStore.watch((state) => console.log(JSON.stringify(state, null, 2)));
