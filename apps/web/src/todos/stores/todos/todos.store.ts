@@ -3,11 +3,8 @@ import { NewTodo, Todo, todoFromNew } from '../../models';
 import { nanoid } from 'nanoid';
 
 export interface TodosStore {
-    filters: {
-        completed?: boolean;
-    };
     todos: Todo[];
-    newTodo: NewTodo | undefined;
+    newTodo: NewTodo | null;
 }
 
 // --- UTILS ---
@@ -42,9 +39,6 @@ export let todosDelete = createEvent<Todo>();
 export let todosDeleteNew = createEvent();
 
 export let $todosStore = createStore<TodosStore>({
-    filters: {
-        completed: undefined,
-    },
     todos: [
         {
             order: 0,
@@ -71,7 +65,7 @@ export let $todosStore = createStore<TodosStore>({
             title: '🎉 Now you know how to use the app, good job!',
         },
     ],
-    newTodo: undefined,
+    newTodo: null,
 });
 
 export let $todosList = $todosStore
@@ -112,7 +106,7 @@ $todosStore
         return {
             ...state,
             todos: [...state.todos, todo],
-            newTodo: undefined,
+            newTodo: null,
         };
     })
     .on(todosDelete, (state, deletedTodo) => ({
@@ -125,5 +119,7 @@ $todosStore
     .on(todosDeleteNew, (state) => ({
         ...state,
         todos: state.newTodo ? decOrder(state.todos, state.newTodo?.order) : state.todos,
-        newTodo: undefined,
+        newTodo: null,
     }));
+
+$todosStore.watch((state) => console.log(JSON.stringify(state, null, 2)));
