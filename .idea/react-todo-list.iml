@@ -8,6 +8,7 @@
       <excludeFolder url="file://$MODULE_DIR$/apps/web/.parcel-cache" />
       <excludeFolder url="file://$MODULE_DIR$/libs/common-react-hooks/dist" />
       <excludeFolder url="file://$MODULE_DIR$/libs/common-react-hooks/.parcel-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/web/.yarn" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

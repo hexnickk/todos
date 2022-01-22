@@ -112,8 +112,14 @@ export const TodoFormComponent = memo(({ todo }: Props) => {
     useClickOutside(titleRef, handleClickOutside);
 
     return (
-        <form ref={formRef} className={`d-flex p-2 align-items-center border-bottom`}>
-            <input type="checkbox" name="checked" className={`me-2`} style={{ transform: 'scale(1.33)' }} />
+        <form ref={formRef} className={`d-flex p-2 align-items-center border-bottom`} data-cy="todo-form">
+            <input
+                type="checkbox"
+                name="checked"
+                className={`me-2`}
+                style={{ transform: 'scale(1.33)' }}
+                data-cy="todo-form__checked"
+            />
             <input
                 ref={titleRef}
                 autoFocus={todoIsNew(todo)}
@@ -124,6 +130,7 @@ export const TodoFormComponent = memo(({ todo }: Props) => {
                     background: 'inherit',
                 }}
                 defaultValue={todo?.title}
+                data-cy="todo-form__title"
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}

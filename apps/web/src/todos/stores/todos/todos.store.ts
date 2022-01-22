@@ -115,4 +115,4 @@ $todosStore
         newTodo: null,
     }));
 
-$todosStore.watch((state) => console.log(JSON.stringify(state, null, 2)));
+// $todosStore.watch((state) => console.log(JSON.stringify(state, null, 2)));
