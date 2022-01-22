@@ -5,39 +5,37 @@
 - [ ] Add gif with app functionality for this README
 - [ ] Save state to local storage
 - [ ] Add stylelint checks
-- [ ] Add typescript checks
-- [ ] Fix Eslint plugin, it's buggy
 - Pages
-  - [ ] Add not found page
-  - [ ] Todo list
-    - [ ] Allow to edit Todos
-    - [ ] Test on mobile
+    - Not Found
+        - [ ] Style page
+    - Todo list
+        - [ ] Test on mobile
 - Tests
-  - [ ] Add tests for storage
+    - [ ] Add tests for storage
 - CI
-  - [ ] Add Github Actions checks
-  - [ ] Run linter
-  - [ ] Run cypress
+    - [ ] Add Github Actions checks
+    - [ ] Run linter
+    - [ ] Run cypress
 - CD
-  - [ ] Publish on Netlify
-  - [ ] Check bundle size, it was huge some time ago
-  - [ ] Change favicon
+    - [ ] Publish on Netlify
+    - [ ] Check bundle size, it was huge some time ago
+    - [ ] Change favicon
 - Libs
-  - [ ] Cover common-react-hooks with tests 
+    - [ ] Cover common-react-hooks with tests
 - Docs
-  - [ ] Add notes how to run app locally 
-  - [ ] Add notes about inline styles
-  - [ ] Add notes about shared libs
-  - [ ] Add notes about e2e tests
-  - [ ] Notes about used linters
+    - [ ] Add notes how to run app locally
+    - [ ] Add notes about inline styles
+    - [ ] Add notes about shared libs
+    - [ ] Add notes about e2e tests
+    - [ ] Notes about used linters
 - Monitoring
-  - [ ] Add sentry checks 
+    - [ ] Add sentry checks
 
 ## v2
 
 - [ ] Add event broker
 - [ ] Add backend
-  - [ ] Add authentication/authorization
+    - [ ] Add authentication/authorization
 
 # Resources
 
