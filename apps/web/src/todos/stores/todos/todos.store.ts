@@ -1,13 +1,13 @@
-import { createEvent, createStore } from 'effector';
+import { createStore } from 'effector';
 import { NewTodo, Todo, todoFromNew } from '../../models';
 import { nanoid } from 'nanoid';
+import { todosCreate, todosCreateNew, todosDelete, todosDeleteNew, todosUpdate } from './todos.events';
 
 export interface TodosStore {
     todos: Todo[];
     newTodo: NewTodo | null;
 }
 
-// --- UTILS ---
 export let incOrder = (todos: Todo[], order: number) =>
     todos.map((item) =>
         item.order > order
@@ -30,13 +30,6 @@ export let decOrder = (todos: Todo[], order: number) =>
 
 export let update = (todos: Todo[], updatedTodo: Todo) =>
     todos.map((item) => (item.publicId === updatedTodo.publicId ? updatedTodo : item));
-
-// --- EVENTS ---
-export let todosCreate = createEvent<NewTodo>();
-export let todosUpdate = createEvent<Todo>();
-export let todosCreateNew = createEvent<Todo | NewTodo | undefined>();
-export let todosDelete = createEvent<Todo>();
-export let todosDeleteNew = createEvent();
 
 export let $todosStore = createStore<TodosStore>({
     todos: [
