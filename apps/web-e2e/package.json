@@ -9,8 +9,8 @@
         "cypress": "^7.4.0"
     },
     "devDependencies": {
-        "@types/node": "^15.12.0",
         "@todoapp/eslint-config-typescript": "../../libs/eslint-config-typescript",
+        "@types/node": "^15.12.0",
         "eslint": "^8.7.0",
         "prettier": "^2.5.1",
         "typescript": "^4.5.5",
