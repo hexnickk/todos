@@ -18,8 +18,8 @@
         "typescript": "^4.5.5"
     },
     "devDependencies": {
-        "@todoapp/eslint-config-typescript": "../../libs/eslint-config-typescript",
         "@parcel/transformer-sass": "^2.2.1",
+        "@todoapp/eslint-config-typescript": "../../libs/eslint-config-typescript",
         "@types/node": "^17.0.10",
         "@types/react": "17.0.38",
         "@types/react-dom": "17.0.11",

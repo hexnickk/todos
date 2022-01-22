@@ -1,9 +1,8 @@
 // --- VENDOR ---
-// TODO: tilde imports don't work, please fix
-@import '../node_modules/normalize.css/normalize.css';
-@import '../node_modules/bootstrap/scss/bootstrap';
+@use 'normalize.css/normalize.css';
+@use 'bootstrap/scss/bootstrap';
 
 // --- COMMON ---
-@import 'src/styles/common/global';
+@use 'src/styles/common/global';
 
 // --- COMPONENTS ---
