@@ -1,5 +1,4 @@
-#!/usr/bin/env node
-import { $ } from 'zx';
+#!/usr/bin/env zx
 
 const prettier = async (globe = '*', fix = false) => {
     await $`yarn prettier -c ${'src/**/' + globe} ${fix ? '--write' : ''}`;
