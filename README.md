@@ -13,6 +13,7 @@ You don't need to build it locally, there is [Live version](https://todos.kozlov
 
 ### Web E2E tests
 
+1. Start [Web](#web) first.
 1. Go to web-e2e folder `cd apps/web-e2e`.
 2. Install deps `yarn`
 3. Run `./scripts/run.mjs`
@@ -32,12 +33,17 @@ You don't need to build it locally, there is [Live version](https://todos.kozlov
 - Tests
     - [ ] Add tests for storage
 - Libs
-    - [ ] Cover common-react-hooks with tests
+    - [ ] Cover `common-react-hooks` with tests
+    - [ ] Add 
+- CI
+  - Don't run linter if there are no changes in related folders
 - Docs
-    - [ ] Add notes about inline styles
-    - [ ] Add notes about shared libs
-    - [ ] Add notes about e2e tests
-    - [ ] Notes about used linters
+    - [ ] CI (Github Actions)
+    - [ ] CD (Netlify)
+    - [ ] Inline styles
+    - [ ] Shared libs
+    - [ ] E2E tests
+    - [ ] Linters
 - Monitoring
     - [ ] Add sentry checks
 
