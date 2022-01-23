@@ -40,7 +40,11 @@
         "zx": "^4.3.0"
     },
     "alias": {
-        "@environment": "./environment/environment.ts"
+        "@environment": "./environment/environment.ts",
+        "react": "./node_modules/react"
     },
-    "browserslist": "> 0.25%, not dead"
+    "browserslist": "> 0.25%, not dead",
+    "resolutions": {
+        "common-react-hooks": "portal:../../libs/common-react-hooks"
+    }
 }

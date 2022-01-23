@@ -3648,14 +3648,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"common-react-hooks@file:../../libs/common-react-hooks::locator=web%40workspace%3A.":
-  version: 1.0.0
-  resolution: "common-react-hooks@file:../../libs/common-react-hooks#../../libs/common-react-hooks::hash=7b5d59&locator=web%40workspace%3A."
+"common-react-hooks@portal:../../libs/common-react-hooks::locator=web%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "common-react-hooks@portal:../../libs/common-react-hooks::locator=web%40workspace%3A."
   peerDependencies:
     react: ^16
-  checksum: 921c79f29bdd3097b3b7184d13f39f53ae1279a0e3527acc5d9ec3802e635d7afa2a7908b3e0e7d77e811229a2ddd8b85e382903104caaf97e584ee051d14c57
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "concat-map@npm:0.0.1":
   version: 0.0.1
