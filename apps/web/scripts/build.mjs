@@ -1,3 +1,4 @@
-#!/usr/bin/env zx
+#!/usr/bin/env node
+import { $ } from 'zx';
 
-$`yarn parcel build src/index.html`
+$`yarn parcel build src/index.html`;
