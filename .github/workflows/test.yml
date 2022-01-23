@@ -8,11 +8,11 @@ jobs:
   install-web:
     runs-on: ubuntu-latest
     steps:
-      - name: Test composite action
-        uses: ./github/actions@v1
-
       - name: Check out repository code
         uses: actions/checkout@v2
+
+      - name: Test composite action
+        uses: ./github/actions@v1
 
       - name: Setup node
         uses: actions/setup-node@v2
