@@ -2000,6 +2000,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@parcel/packager-raw-url@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "@parcel/packager-raw-url@npm:2.2.1"
+  dependencies:
+    "@parcel/plugin": ^2.2.1
+    "@parcel/utils": ^2.2.1
+  checksum: d58ea9d5ad598d60c47075db9eae1e7137c07f57f13e5f43949e69ea8f0b803ce659d940bc9a834f1f9ae8207349733eb7dcd510b9abe6475b440eaa449949af
+  languageName: node
+  linkType: hard
+
 "@parcel/packager-raw@npm:^2.2.1":
   version: 2.2.1
   resolution: "@parcel/packager-raw@npm:2.2.1"
@@ -2297,6 +2307,18 @@ __metadata:
     posthtml-render: ^3.0.0
     semver: ^5.7.1
   checksum: a2c6c353b86d3d887bc1d1aa9d52fa7697553056f12b0fb175aedaed4d97c9bf3c3f04bc04d38ffee728972cedd98df645a354ca8cbad33d9772ed607a6cafe6
+  languageName: node
+  linkType: hard
+
+"@parcel/transformer-webmanifest@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "@parcel/transformer-webmanifest@npm:2.2.1"
+  dependencies:
+    "@parcel/diagnostic": ^2.2.1
+    "@parcel/plugin": ^2.2.1
+    "@parcel/utils": ^2.2.1
+    json-source-map: ^0.6.1
+  checksum: 266e4b39333bc0d18e64466ca2fda05a1bdd9cbc172d2b519a51808c5922c00953796688a00e98b17d912e45fcb8a564e8ef41da2bb20f8b6a1aa40c0e9fca4d
   languageName: node
   linkType: hard
 
@@ -8702,7 +8724,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "web@workspace:."
   dependencies:
+    "@parcel/packager-raw-url": ^2.2.1
     "@parcel/transformer-sass": ^2.2.1
+    "@parcel/transformer-webmanifest": ^2.2.1
     "@todoapp/eslint-config-typescript": ../../libs/eslint-config-typescript
     "@types/node": ^17.0.10
     "@types/react": 17.0.38

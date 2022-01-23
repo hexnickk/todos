@@ -1,21 +1,25 @@
-# Install
+# Todos
 
-## Web
+You don't need to build it locally, there is [Live version](https://todos.kozlovzxc.ru/).
+
+## Install
+
+### Web
 
 1. Go to web folder `cd apps/web`.
 2. Install deps `yarn`.
 3. Run `./scripts/start.mjs`.
-4. Open in browser [http://localhost:1234/](http://localhost:1234/)
+4. Open in browser [http://localhost:1234/](http://localhost:1234/).
 
-## Web E2E tests
+### Web E2E tests
 
 1. Go to web-e2e folder `cd apps/web-e2e`.
 2. Install deps `yarn`
 3. Run `./scripts/run.mjs`
 
-# TODO:
+## TODO:
 
-## v1
+### v1
 
 - [ ] Add gif with app functionality for this README
 - [ ] Save state to local storage
@@ -31,10 +35,6 @@
     - [ ] Add Github Actions checks
     - [ ] Run linter
     - [ ] Run cypress
-- CD
-    - [ ] Publish on Netlify
-    - [ ] Check bundle size, it was huge some time ago
-    - [ ] Change favicon
 - Libs
     - [ ] Cover common-react-hooks with tests
 - Docs
@@ -46,13 +46,13 @@
 - Monitoring
     - [ ] Add sentry checks
 
-## v2
+### v2
 
 - [ ] Add event broker
 - [ ] Add backend
     - [ ] Add authentication/authorization
 
-# Resources
+## Resources
 
 Api reference -> [jsonplaceholder.typicode.com](https://jsonplaceholder.typicode.com/guide/)
 
