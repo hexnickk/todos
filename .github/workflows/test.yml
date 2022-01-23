@@ -11,24 +11,11 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
-      - name: Test composite action
+      - name: Install web
         uses: ./.github/actions/install-web
 
-      - name: Setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16.x'
-
-      - name: Cache saved yarn cache directory
-        uses: actions/cache@v2
-        with:
-          path: apps/web/.yarn
-          key: ${{ runner.os }}-yarn-${{ hashFiles('apps/web/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Install dependencies
-        run: yarn --frozen-lockfile
+      - name: Lint
+        run: yarn zx ./scripts/lint.mjs
         working-directory: apps/web
 
 #  install-web-e2e:
