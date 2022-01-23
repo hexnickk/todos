@@ -1,0 +1,75 @@
+name: Test everything
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+jobs:
+  install-web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Install deps
+        uses: ./.github/actions/install-web
+
+  install-web-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Install deps
+        uses: ./.github/actions/install-web-e2e
+
+  lint-web:
+    runs-on: ubuntu-latest
+    needs: install-web
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Install deps
+        uses: ./.github/actions/install-web
+
+      - name: Lint
+        run: yarn zx ./scripts/lint.mjs
+        working-directory: apps/web
+
+  lint-web-e2e:
+    runs-on: ubuntu-latest
+    needs: install-web-e2e
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Install deps
+        uses: ./.github/actions/install-web-e2e
+
+      - name: Lint
+        run: yarn zx ./scripts/lint.mjs
+        working-directory: apps/web-e2e
+
+  run-web-e2e:
+    runs-on: ubuntu-latest
+    needs: [ install-web, install-web-e2e ]
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Install web
+        uses: ./.github/actions/install-web
+
+      - name: Install web e2e
+        uses: ./.github/actions/install-web-e2e
+
+      - name: Start web in docker
+        run: yarn zx ./scripts/start-docker.mjs
+        working-directory: apps/web
+
+      - name: Run e2e
+        run: yarn zx ./scripts/run.mjs
+        working-directory: apps/web-e2e
+
+

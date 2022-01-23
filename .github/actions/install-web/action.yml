@@ -1,0 +1,22 @@
+name: 'Install web'
+description: 'Install web'
+runs:
+  using: "composite"
+  steps:
+    - name: Setup node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16.x'
+
+    - name: Cache saved yarn cache directory
+      uses: actions/cache@v2
+      with:
+        path: apps/web/.yarn
+        key: ${{ runner.os }}-yarn-${{ hashFiles('apps/web/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+
+    - name: Install dependencies
+      run: yarn --frozen-lockfile
+      shell: bash
+      working-directory: apps/web
