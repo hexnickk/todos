@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Test composite action
-        uses: ./.github/actions@v1
+        uses: ./.github/actions/install-web@v1
 
       - name: Setup node
         uses: actions/setup-node@v2
