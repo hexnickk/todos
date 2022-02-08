@@ -25,7 +25,7 @@ export const PlusButtonComponent = memo(({ onClick }: Props) => {
                 }}
                 onClick={handleClick}
             >
-                +
+                <i className="bi bi-plus" />
             </button>
         </>
     );
