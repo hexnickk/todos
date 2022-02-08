@@ -9,8 +9,8 @@ export interface Todo {
 
 export type NewTodo = Omit<Todo, 'publicId'>;
 
-export const todoIsRegular = (todo: Todo | NewTodo): todo is Todo => 'publicId' in todo;
-export const todoIsNew = (todo: Todo | NewTodo): todo is NewTodo => !todoIsRegular(todo);
+export const todoIsExisting = (todo: Todo | NewTodo): todo is Todo => 'publicId' in todo;
+export const todoIsNew = (todo: Todo | NewTodo): todo is NewTodo => !todoIsExisting(todo);
 export const todoFromNew = (todo: NewTodo): Todo => ({
     ...todo,
     publicId: nanoid(),

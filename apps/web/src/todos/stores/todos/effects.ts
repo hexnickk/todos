@@ -1,6 +1,6 @@
 import { createEffect } from 'effector';
-import { TodosStore } from './models';
 import { nanoid } from 'nanoid';
+import { Todo } from '../../models';
 
 export const LOCAL_STORAGE_KEY = 'todos_store';
 
@@ -31,28 +31,20 @@ let defaultTodos = [
     },
 ];
 
-export let todosLoadFx = createEffect(async (): Promise<TodosStore> => {
-    let baseStore: TodosStore = {
-        todos: defaultTodos,
-        newTodo: null,
-    };
-
+export let todosLoadFx = createEffect(async (): Promise<Todo[]> => {
     // Imitating HTTP request
     return await new Promise((resolve) => {
         setTimeout(() => {
             let rawTodos = window.localStorage.getItem(LOCAL_STORAGE_KEY);
             if (rawTodos == null) {
-                resolve(baseStore);
+                resolve(defaultTodos);
                 return;
             }
-            resolve({
-                ...baseStore,
-                todos: JSON.parse(rawTodos),
-            });
-        }, 1000);
+            resolve(JSON.parse(rawTodos));
+        }, 500);
     });
 });
 
-export let todosSaveFx = createEffect((store: TodosStore) => {
-    window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(store.todos));
+export let todosSaveFx = createEffect((todos: Todo[]) => {
+    window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
 });

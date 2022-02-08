@@ -2,7 +2,7 @@ import { Todo } from '../../models';
 
 export let incOrder = (todos: Todo[], order: number) =>
     todos.map((item) =>
-        item.order > order
+        item.order >= order
             ? {
                   ...item,
                   order: item.order + 1,
