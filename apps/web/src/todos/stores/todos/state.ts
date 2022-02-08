@@ -1,63 +1,11 @@
 import { createStore } from 'effector';
-import { NewTodo, Todo, todoFromNew } from '../../models';
-import { nanoid } from 'nanoid';
-import { todosCreate, todosCreateNew, todosDelete, todosDeleteNew, todosUpdate } from './todos.events';
-
-export interface TodosStore {
-    todos: Todo[];
-    newTodo: NewTodo | null;
-}
-
-export let incOrder = (todos: Todo[], order: number) =>
-    todos.map((item) =>
-        item.order > order
-            ? {
-                  ...item,
-                  order: item.order + 1,
-              }
-            : item
-    );
-
-export let decOrder = (todos: Todo[], order: number) =>
-    todos.map((item) =>
-        item.order >= order
-            ? {
-                  ...item,
-                  order: item.order - 1,
-              }
-            : item
-    );
-
-export let update = (todos: Todo[], updatedTodo: Todo) =>
-    todos.map((item) => (item.publicId === updatedTodo.publicId ? updatedTodo : item));
+import { Todo, todoFromNew } from '../../models';
+import { todosCreate, todosCreateNew, todosDelete, todosDeleteNew, todosUpdate } from './events';
+import { TodosStore } from './models';
+import { decOrder, incOrder, update } from './utils';
 
 export let $todosStore = createStore<TodosStore>({
-    todos: [
-        {
-            order: 0,
-            publicId: nanoid(),
-            completed: false,
-            title: '✅ Click on the big green button or click anywhere down below 👇',
-        },
-        {
-            order: 1,
-            publicId: nanoid(),
-            completed: false,
-            title: '✅ Try typing "Buy some milk".',
-        },
-        {
-            order: 2,
-            publicId: nanoid(),
-            completed: false,
-            title: '✅ Press "Enter" or click on some empty space again.',
-        },
-        {
-            order: 3,
-            publicId: nanoid(),
-            completed: false,
-            title: '🎉 Now you know how to use the app, good job!',
-        },
-    ],
+    todos: [],
     newTodo: null,
 });
 
@@ -115,4 +63,4 @@ $todosStore
         newTodo: null,
     }));
 
-// $todosStore.watch((state) => console.log(JSON.stringify(state, null, 2)));
+$todosStore.watch((state) => console.log(JSON.stringify(state, null, 2)));

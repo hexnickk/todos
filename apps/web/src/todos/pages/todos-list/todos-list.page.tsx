@@ -1,7 +1,7 @@
 import React, { memo, useCallback } from 'react';
 import { useStore } from 'effector-react';
 import { TodoListComponent, TodoPlaceholderComponent } from '../../components';
-import { $todosList, $todosNew, todosCreateNew } from '../../stores';
+import { $todosList, $todosNew, todosCreateNew } from '../../stores/todos';
 import { Container } from 'react-bootstrap';
 import { PlusButtonComponent } from '../../../common/components';
 

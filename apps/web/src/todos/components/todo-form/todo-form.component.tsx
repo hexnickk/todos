@@ -1,6 +1,6 @@
 import React, { KeyboardEvent, memo, useCallback, useRef, useState } from 'react';
 import { NewTodo, Todo, todoIsNew, todoIsRegular } from '../../models';
-import { todosCreate, todosDelete, todosDeleteNew, todosCreateNew, todosUpdate } from '../../stores';
+import { todosCreate, todosDelete, todosDeleteNew, todosCreateNew, todosUpdate } from '../../stores/todos';
 import { useClickOutside } from 'common-react-hooks';
 
 interface Props {
