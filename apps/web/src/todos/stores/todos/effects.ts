@@ -41,7 +41,7 @@ export let todosLoadFx = createEffect(async (): Promise<Todo[]> => {
                 return;
             }
             resolve(JSON.parse(rawTodos));
-        }, 500);
+        }, Math.random() * 2000);
     });
 });
 

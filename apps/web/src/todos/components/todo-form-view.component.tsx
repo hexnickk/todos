@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, PropsWithChildren, useCallback, useRef, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, PropsWithChildren, useCallback, useRef, useState } from 'react';
 import { NewTodo, Todo } from '../models';
 import { typedMemo } from '../../utils/react';
 import { useClickOutside } from 'common-react-hooks';
@@ -105,23 +105,38 @@ export const TodoFormViewComponent = typedMemo(
             }
         }, [active, todo, onDelete, onUpdate]);
 
+        let handleCheckboxChange = useCallback(
+            (event: ChangeEvent<HTMLInputElement>) => {
+                if (todo == null) {
+                    return;
+                }
+                if (active) {
+                    return;
+                }
+                onUpdate?.({ ...todo, completed: event.currentTarget.checked });
+            },
+            [active, todo, onUpdate]
+        );
+
         useClickOutside(titleRef, handleClickOutside);
 
         return (
-            <form ref={formRef} className={`d-flex p-2 align-items-center border-bottom`} data-cy="todo-form">
+            <form ref={formRef} className={`d-flex align-items-center`} data-cy="todo-form">
                 <input
                     type="checkbox"
                     name="checked"
                     className={`me-2`}
                     style={{ transform: 'scale(1.33)' }}
                     data-cy="todo-form__checked"
+                    defaultChecked={todo?.completed}
+                    onChange={handleCheckboxChange}
                 />
                 <input
                     ref={titleRef}
                     autoFocus={autoFocus}
                     type="text"
                     name="text"
-                    className={`w-100 p-1 border-0`}
+                    className={`w-100 py-3 border-0 border-bottom`}
                     style={{
                         background: 'inherit',
                     }}
