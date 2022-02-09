@@ -9,25 +9,25 @@ let defaultTodos = [
         order: 0,
         publicId: nanoid(),
         completed: false,
-        title: '✅ Click on the big green button or click anywhere down below 👇',
+        title: 'Step 1. Create a new note by clicking on the big green button or clicking anywhere down below 👇',
     },
     {
         order: 1,
         publicId: nanoid(),
         completed: false,
-        title: '✅ Try typing "Buy some milk".',
+        title: 'Step 2. Edit a new note by typing "Buy some milk".',
     },
     {
         order: 2,
         publicId: nanoid(),
         completed: false,
-        title: '✅ Press "Enter" or click on some empty space again.',
+        title: 'Step 3. Save a new note by pressing "Enter" or clicking on some empty space again.',
     },
     {
         order: 3,
         publicId: nanoid(),
         completed: false,
-        title: '🎉 Now you know how to use the app, good job!',
+        title: "Step 4. That's it, simple and efficient! Also it works on mobile as well 👍",
     },
 ];
 
@@ -41,7 +41,7 @@ export let todosLoadFx = createEffect(async (): Promise<Todo[]> => {
                 return;
             }
             resolve(JSON.parse(rawTodos));
-        }, Math.random() * 2000);
+        }, Math.random() * 800 + 200);
     });
 });
 

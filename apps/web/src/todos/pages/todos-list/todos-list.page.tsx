@@ -29,19 +29,23 @@ export const TodosListPage = memo(() => {
         <Container className={'py-2 py-md-5 flex-grow-1 d-flex flex-column'}>
             <h1 className="mb-2 text-primary d-flex justify-content-between align-items-center">
                 <span>Todos</span>
-                <span>{todosLoading ? '...' : todosUpcoming.length}</span>
+                <span data-cy="upcoming-number">{todosLoading ? '...' : todosUpcoming.length}</span>
             </h1>
             <div className={`d-flex justify-content-between align-items-center border-bottom`}>
-                <span className={`text-muted`}>
+                <span data-cy="completed-number" className={`text-muted`}>
                     {todosLoading ? '...' : todosCompleted.length.toString()} Completed
                 </span>
-                <button className={`btn btn-link`} onClick={() => setShowCompleted(!showCompleted)}>
+                <button
+                    className={`btn btn-link`}
+                    data-cy="show-completed"
+                    onClick={() => setShowCompleted(!showCompleted)}
+                >
                     {showCompleted ? 'Hide' : 'Show'}
                 </button>
             </div>
             {todosLoading ? (
                 <div className="p-3">
-                    <div className="spinner-border" role="status">
+                    <div data-cy="spinner" className="spinner-border" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </div>
                 </div>

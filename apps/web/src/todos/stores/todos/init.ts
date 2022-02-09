@@ -1,6 +1,6 @@
 import { forward } from 'effector';
 import { todosLoadFx, todosSaveFx } from './effects';
-import { $todosList, $todosListSorted, $todosLoading, $todosNew } from './state';
+import { $todosList, $todosLoading, $todosNew } from './state';
 import {
     todosDelete,
     todosLoadingEnd,
@@ -57,4 +57,4 @@ $todosList.on(todosNewSave, (list, newTodo) => {
 });
 $todosNew.on(todosNewSave, () => null);
 
-$todosListSorted.watch((list) => console.log(JSON.stringify(list, null, 2)));
+// $todosListSorted.watch((list) => console.log(JSON.stringify(list, null, 2)));
