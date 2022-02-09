@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, PropsWithChildren, useCallback, useRef, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
 import { NewTodo, Todo } from '../models';
 import { typedMemo } from '../../utils/react';
 import { useClickOutside } from 'common-react-hooks';
@@ -22,8 +22,26 @@ export const TodoFormViewComponent = typedMemo(
         onDelete,
     }: PropsWithChildren<Props<T>>) => {
         let [active, setActive] = useState(false);
+
+        let [title, setTitle] = useState('');
+        useEffect(() => {
+            if (todo != null) {
+                setTitle(todo.title);
+            }
+        }, [todo]);
+
+        let formReset = useCallback(() => {
+            setTitle('');
+        }, []);
+
         let formRef = useRef<HTMLFormElement | null>(null);
         let titleRef = useRef<HTMLInputElement | null>(null);
+
+        useEffect(() => {
+            if (autoFocus) {
+                titleRef.current?.focus();
+            }
+        }, [todo, autoFocus]);
 
         let handleKeyDown = useCallback(
             (event: KeyboardEvent) => {
@@ -35,16 +53,13 @@ export const TodoFormViewComponent = typedMemo(
                 let isTabKey = event.key === 'Tab';
                 let isSpecialKey = isEscapeKey || isEnterKey || isTabKey;
 
-                let title = formRef.current?.text.value;
-                let completed = formRef.current?.checked.checked;
-
                 if (isSpecialKey && title === '') {
                     // We don't need to prevent tabbing out
                     if (isEnterKey || isEscapeKey) {
                         event.preventDefault();
                     }
                     onDelete?.(todo);
-                    formRef.current?.reset();
+                    formReset();
                     return;
                 }
 
@@ -53,9 +68,8 @@ export const TodoFormViewComponent = typedMemo(
                     onUpdateAndContinue?.({
                         ...todo,
                         title,
-                        completed,
                     });
-                    formRef.current?.reset();
+                    formReset();
                     return;
                 }
 
@@ -64,15 +78,31 @@ export const TodoFormViewComponent = typedMemo(
                     onUpdate?.({
                         ...todo,
                         title,
-                        completed,
                     });
                     titleRef.current?.blur();
-                    formRef.current?.reset();
+                    formReset();
                     return;
                 }
             },
-            [todo, onUpdate, onUpdateAndContinue, onDelete]
+            [title, todo, formReset, onUpdate, onUpdateAndContinue, onDelete]
         );
+
+        let handleCheckboxChange = useCallback(
+            (event: ChangeEvent<HTMLInputElement>) => {
+                if (todo == null) {
+                    return;
+                }
+                onUpdate?.({ ...todo, completed: event.currentTarget.checked });
+            },
+            [todo, onUpdate]
+        );
+
+        let handleTitleChange = useCallback((event: ChangeEvent<HTMLDivElement>) => {
+            let title = event.currentTarget.textContent;
+            if (title != null) {
+                setTitle(title);
+            }
+        }, []);
 
         let handleFocus = useCallback(() => {
             setActive(true);
@@ -90,8 +120,6 @@ export const TodoFormViewComponent = typedMemo(
                 return;
             }
 
-            let title = formRef.current?.text.value;
-            let completed = formRef.current?.checked.checked;
             let isEmptyTitle = title === '';
 
             if (isEmptyTitle) {
@@ -100,37 +128,36 @@ export const TodoFormViewComponent = typedMemo(
                 onUpdate?.({
                     ...todo,
                     title,
-                    completed,
                 });
             }
-        }, [active, todo, onDelete, onUpdate]);
+        }, [title, active, todo, onDelete, onUpdate]);
 
         useClickOutside(titleRef, handleClickOutside);
 
         return (
-            <form ref={formRef} className={`d-flex p-2 align-items-center border-bottom`} data-cy="todo-form">
+            <form ref={formRef} className={`d-flex align-items-center`} data-cy="todo-form">
                 <input
                     type="checkbox"
                     name="checked"
-                    className={`me-2`}
+                    className={`me-3`}
                     style={{ transform: 'scale(1.33)' }}
                     data-cy="todo-form__checked"
+                    defaultChecked={todo?.completed}
+                    onChange={handleCheckboxChange}
                 />
-                <input
+                <div
                     ref={titleRef}
-                    autoFocus={autoFocus}
-                    type="text"
-                    name="text"
-                    className={`w-100 p-1 border-0`}
-                    style={{
-                        background: 'inherit',
-                    }}
-                    defaultValue={todo?.title}
+                    contentEditable={true}
+                    suppressContentEditableWarning={true}
+                    className={`w-100 py-3 px-1 border-0 border-bottom`}
                     data-cy="todo-form__title"
                     onFocus={handleFocus}
                     onBlur={handleBlur}
+                    onInput={handleTitleChange}
                     onKeyDown={handleKeyDown}
-                />
+                >
+                    {todo?.title}
+                </div>
             </form>
         );
     }
