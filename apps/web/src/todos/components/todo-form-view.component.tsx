@@ -30,10 +30,6 @@ export const TodoFormViewComponent = typedMemo(
             }
         }, [todo]);
 
-        let formReset = useCallback(() => {
-            setTitle('');
-        }, []);
-
         let formRef = useRef<HTMLFormElement | null>(null);
         let titleRef = useRef<HTMLInputElement | null>(null);
 
@@ -59,7 +55,6 @@ export const TodoFormViewComponent = typedMemo(
                         event.preventDefault();
                     }
                     onDelete?.(todo);
-                    formReset();
                     return;
                 }
 
@@ -69,7 +64,6 @@ export const TodoFormViewComponent = typedMemo(
                         ...todo,
                         title,
                     });
-                    formReset();
                     return;
                 }
 
@@ -80,11 +74,10 @@ export const TodoFormViewComponent = typedMemo(
                         title,
                     });
                     titleRef.current?.blur();
-                    formReset();
                     return;
                 }
             },
-            [title, todo, formReset, onUpdate, onUpdateAndContinue, onDelete]
+            [title, todo, onUpdate, onUpdateAndContinue, onDelete]
         );
 
         let handleCheckboxChange = useCallback(

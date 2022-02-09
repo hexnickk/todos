@@ -14,7 +14,7 @@ export let TodoListComponent = memo((props: Props) => {
                 todoIsExisting(todo) ? (
                     <TodoFormExistingComponent key={todo.publicId} todo={todo} />
                 ) : (
-                    <TodoFormNewComponent key={'new-todo'} todo={todo} />
+                    <TodoFormNewComponent key={Math.random().toString()} todo={todo} />
                 )
             )}
         </>
